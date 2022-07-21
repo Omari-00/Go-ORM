@@ -33,10 +33,13 @@ func connectDB() *sql.DB {
 }
 
 func query(db *sql.DB) {
-	var id, age, salary int
-	var name, address string
+	//var id, age, salary int
+	//var name, address string
 
-	rows, err := db.Query("select * from company where id = 1")
+	var id, age, salary, name, address string
+	//这个类型不需要与数据库类型匹配
+
+	rows, err := db.Query("select * from company") //不需要加“;"
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -44,20 +47,20 @@ func query(db *sql.DB) {
 
 	for rows.Next() { //
 		err := rows.Scan(&id, &name, &age, &address, &salary) //
-
 		if err != nil {
 			fmt.Println(err)
 		}
+		fmt.Println(id, name, age, address, salary)
 	}
 
 	err = rows.Err()
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println(id, name, age, address, salary)
 }
 
 func main() {
 	db := connectDB()
-	query(db)//
+	query(db)
 }
+
