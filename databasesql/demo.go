@@ -59,5 +59,5 @@ func query(db *sql.DB) {
 
 func main() {
 	db := connectDB()
-	query(db)
+	query(db)//
 }
